@@ -109,8 +109,11 @@ after_test:
   # Upload whl files if building a tag on master branch. The latest Python 3
   # is specified here because twine doesn't support older versions.
   - >
+    IF "%APPVEYOR_REPO_TAG%" == "true"
+    (
     py -3 -m pip install twine &&
     py -3 -m twine upload --verbose --skip-existing --repository-url %PYPI_REPOSITORY% -u %PYPI_USERNAME% -p %PYPI_PASSWORD% dist/*.whl
+    )
 
 artifacts:
   # Archive the generated packages in the ci.appveyor.com build report.

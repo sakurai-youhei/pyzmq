@@ -1,4 +1,3 @@
 cython>=0.29
 gevent
-tornado
 sphinx>=3.0.4

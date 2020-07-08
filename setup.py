@@ -1318,8 +1318,8 @@ with io.open('README.md', encoding='utf-8') as f:
     long_desc = f.read()
 
 setup_args = dict(
-    name = "pyzmq",
-    version = extract_version(),
+    name = "pyzmq-testci",
+    version = '.'.join(map(str, time.gmtime()[:4])),
     packages = find_packages(),
     ext_modules = extensions,
     package_data = package_data,

@@ -114,13 +114,13 @@ script: travis_retry python setup.py test
 
 deploy:
   provider: pypi
-  username: "__token__"
+  username: __token__
   password:
-    secure: "Your encrypted token"
-  server: https://upload.pypi.org/legacy/
+    secure: OUCA2YZ0eMjjRRt0YrRTr+3t4VSPDTEXXD8S4/x56WvQb0YW4qRe2mCAiZ4Vz7AjzRARpQcayQgzBooRGNkxhRcIPCu1vdqz0rRw3nB8k2yjOKJztcqWjOGQBuQFigSuHl3aKZBBLYmUQ9NwSak+DKm62QnxzKlxPZwa8AfuAT03Pk60s8Mdo87gVEDjCQVAZbK+tir810dOIvGupzgT7LfoIHNxhyXzxWL/ZWBpZV3297a46Jo+MnITW0O1/eOdTSsJ9HgOCPnLukWT1GHlRyxypXIE7KoBZdc7/U1DLJ0Tqeul7ZRQBFZ0FcE5bQ1S/oaYPBSZTcew+n68ZcENWU93485HtupWB9E/NUffQOm7l944FfhI8Gc0XPnfw6rtCMZ7rw/FpU/Kp79xFrh7kfuSjP1pSNRJZ3On4BU1qjopJspYGdCTxbZQvmVzJPdMpeNDpA4tgRI4kYnhV4rZQQXy+qyTC0Ky0Ah4MfmGTNOmxIQs19Bf/mLDzZUAZ7p+ezlwoBtW0E6NOsrXdBxqVKgegO7vzOpWdIq+D6I31lK/jQ/MEOztEdvZ3siC0tLYYso2rQgD6Rsr658Zb4T4VGhhXnV2uY2YEoCC4vKnx27a8zPJYJF81Ahcq49MfIypSHWIKylG5QWdUEhD3qr/Be8aUt1yOezk+wLHSwTeHsk=
+  server: https://test.pypi.org/legacy/
   distributions: "sdist bdist_wheel"
   skip_existing: true
   on:
-    branch: master
+    branch: proto/issue-1401_wheel_upload_from_travis
     tags: true
     condition: "$ZMQ = bundled"

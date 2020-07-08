@@ -19,6 +19,7 @@ from zmq.tests import BaseZMQTestCase
 
 on_travis_ppc64le = os.environ.get('TRAVIS_CPU_ARCH') == 'ppc64le'
 on_travis_s390x = os.environ.get('TRAVIS_CPU_ARCH') == 's390x'
+on_travis_arm64 = os.environ.get('TRAVIS_CPU_ARCH') == 'arm64'
 
 
 class TestPubLog(BaseZMQTestCase):
@@ -109,8 +110,8 @@ class TestPubLog(BaseZMQTestCase):
         
         logger.removeHandler(handler)
     
-    @mark.skipif(on_travis_ppc64le or on_travis_s390x,
-                 reason="test sometimes hangs up on Travis ppc64le and s390x")
+    @mark.skipif(on_travis_ppc64le or on_travis_s390x or on_travis_arm64,
+                 reason="test sometimes hangs up on Travis non-amd64")
     def test_blank_root_topic(self):
         logger, handler, sub_everything = self.connect_handler()
         sub_everything.setsockopt(zmq.SUBSCRIBE, b'')

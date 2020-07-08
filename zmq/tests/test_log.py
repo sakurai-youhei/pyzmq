@@ -5,13 +5,20 @@
 
 
 import logging
+import os
 import time
 from unittest import TestCase
+
+from pytest import mark
 
 import zmq
 from zmq.log import handlers
 from zmq.utils.strtypes import b, u
 from zmq.tests import BaseZMQTestCase
+
+
+on_travis_ppc64le = os.environ.get('TRAVIS_CPU_ARCH') == 'ppc64le'
+on_travis_s390x = os.environ.get('TRAVIS_CPU_ARCH') == 's390x'
 
 
 class TestPubLog(BaseZMQTestCase):
@@ -102,6 +109,8 @@ class TestPubLog(BaseZMQTestCase):
         
         logger.removeHandler(handler)
     
+    @mark.skipif(on_travis_ppc64le or on_travis_s390x,
+                 reason="test sometimes hangs up on Travis ppc64le and s390x")
     def test_blank_root_topic(self):
         logger, handler, sub_everything = self.connect_handler()
         sub_everything.setsockopt(zmq.SUBSCRIBE, b'')

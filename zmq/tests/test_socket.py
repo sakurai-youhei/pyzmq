@@ -28,6 +28,7 @@ from zmq.utils.strtypes import unicode
 pypy = platform.python_implementation().lower() == 'pypy'
 windows = platform.platform().lower().startswith('windows')
 on_travis = bool(os.environ.get('TRAVIS_PYTHON_VERSION'))
+on_travis_s390x = os.environ.get('TRAVIS_CPU_ARCH') == 's390x'
 
 # polling on windows is slow
 POLL_TIMEOUT = 1000 if windows else 100
@@ -522,6 +523,8 @@ class TestSocket(BaseZMQTestCase):
         ),
         reason="only run on 64b and not on Travis."
     )
+    @mark.skipif(on_travis_s390x,
+                 reason="python interpreter crashes on Travis s390x")
     @mark.large
     def test_large_send(self):
         c = os.urandom(1)

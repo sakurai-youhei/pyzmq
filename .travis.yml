@@ -23,6 +23,9 @@ env:
   - ZMQ=bundled
 
 before_install:
+  - |
+    # https://travis-ci.community/t/permission-issue-while-building-wheels-for-various-python-packages/7822/7
+    sudo chown -Rv $USER:$GROUP ~/.cache/pip/wheels
   - sudo add-apt-repository -y ppa:anton+/dnscrypt
   - sudo apt-get update
   - |

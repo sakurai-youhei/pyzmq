@@ -93,6 +93,19 @@ matrix:
       env: ZMQ=
     - python: nightly
       env: ZMQ=bundled
+  exclude:
+    - python: pypy
+      arch: ppc64le
+    - python: pypy3
+      arch: ppc64le
+    - python: pypy
+      arch: s390x
+    - python: pypy3
+      arch: s390x
+    - python: pypy
+      arch: arm64
+    - python: pypy3
+      arch: arm64
   allow_failures:
     - env: ZMQ=libzmq
     - python: nightly
